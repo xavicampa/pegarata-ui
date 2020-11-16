@@ -29,9 +29,14 @@
   color: gray;
 }
 
-/* .Add-button {
-  color: #282c34;
-} */
+#colorpickerbutton {
+  background-color: #282c34;
+  border-color: #282c34;
+}
+#addbutton {
+  background-color: #282c34;
+  border-color: #282c34;
+}
 
 #Todo-button {
   font-size: medium;

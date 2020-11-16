@@ -130,10 +130,20 @@ class App extends React.Component {
 
             <InputGroupAddon addonType="append">
               {/*  */}
-              <Button color="primary" onClick={this.handleAdd}>
+              <Button color="primary" id="colorpickerbutton" onClick={this.handleAdd}>
                 <SketchExample />
               </Button>
-              <Button color="primary" onClick={this.handleAdd}>Add</Button>
+              {/* <div className="dropdown">
+                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Color
+                </button>
+                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a className="dropdown-item" href="#">Action</a>
+                  <a className="dropdown-item" href="#">Another action</a>
+                  <a className="dropdown-item" href="#">Something else here</a>
+                </div>
+              </div> */}
+              <Button color="primary" id="addbutton" onClick={this.handleAdd}>Add</Button>
             </InputGroupAddon>
 
           </InputGroup>
