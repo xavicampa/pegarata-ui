@@ -14,14 +14,14 @@
   color: white;
 }
 
+.Input {
+  margin-top: 10px;
+  block-size: auto;
+}
+
 .Todo-items {
   margin-top: 5px;
   color: #000;
-}
-
-.Input {
-  margin-top: 5px;
-  block-size: auto;
 }
 
 .Done-items {
@@ -29,13 +29,33 @@
   color: gray;
 }
 
-.Add-button {
+/* .Add-button {
   color: #282c34;
+} */
+
+#Todo-button {
+  font-size: medium;
+  /* font-weight: normal; */
+  /* color: white; */
+  text-decoration: none;
+  margin: 2px;
 }
 
 #Done-button {
-  color: rgb(185, 185, 185);
+  font-size: medium;
+  /* font-weight: lighter; */
+  /* color: darkgray; */
   text-decoration: line-through;
+  margin: 2px;
+}
+
+#todo-container{
+  margin-top: 10px;
+}
+
+
+#done-container{
+  margin-top: 10px;
 }
 
 #Pegarata-img {

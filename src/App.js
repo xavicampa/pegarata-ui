@@ -1,19 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import './App.css';
-import { Button, ListGroup, ListGroupItem, InputGroup, InputGroupAddon, Input } from 'reactstrap';
+import { Button, InputGroup, InputGroupAddon, Input } from 'reactstrap';
+import SketchExample from './components/sketch'
 
 const ButtonItems = props =>
   props.items.map((item) =>
-    <ListGroupItem tag="button"
-      id={item.done ? "Done-button" : "Todo-button"}
-      action
-      onClick={(e) => item.onToggleItem(e.target.value)}
-      value={item.name}
+    // <ListGroupItem tag="button"
+    //   id={item.done ? "Done-button" : "Todo-button"}
+    //   action
+    //   onClick={(e) => item.onToggleItem(e.target.value)}
+    //   value={item.name}
+    //   key={item.name}
+    // >
+    //   {item.name}
+    // </ListGroupItem>
+    <a
+      className={item.done ? "badge badge-pill badge-secondary" : "badge badge-pill badge-primary"}
+      href="#"
       key={item.name}
-    >
+      id={item.done ? "Done-button" : "Todo-button"}
+      onClick={(e) => {
+        e.preventDefault();
+        item.onToggleItem(e.target.name);
+      }}
+      name={item.name}>
       {item.name}
-    </ListGroupItem>
+    </a >
+    // <Button className="btn btn-primary btn-sm" key={item.name} onClick={(e) => item.onToggleItem(e.target.value)} name={item.name}>{item.name}</Button>
   )
 
 ButtonItems.propTypes = {
@@ -53,6 +67,7 @@ class App extends React.Component {
   }
 
   handleDone(e) {
+    console.log(e)
     let item = this.state.todoItems.find(item => item.name.toLowerCase() === e.toLowerCase())
 
     item.done = true
@@ -112,16 +127,43 @@ class App extends React.Component {
               onChange={this.handleItemChange}
               onKeyPress={this.handleKeyPress}
             />
+
             <InputGroupAddon addonType="append">
+              {/*  */}
+              <Button color="primary" onClick={this.handleAdd}>
+                <SketchExample />
+              </Button>
               <Button color="primary" onClick={this.handleAdd}>Add</Button>
             </InputGroupAddon>
+
           </InputGroup>
-          <ListGroup className="Todo-items">
+          {/* <ListGroup className="Todo-items">
             <ButtonItems items={this.state.todoItems} />
           </ListGroup>
           <ListGroup className="Done-items">
             <ButtonItems items={this.state.doneItems} />
-          </ListGroup>
+          </ListGroup> */}
+        </div>
+
+        <div className="container" id="todo-container">
+          <div className="card">
+            <h6 className="card-header">𐄂&nbsp;TODO</h6>
+            <div className="card-body">
+              <ButtonItems items={this.state.todoItems} />
+            </div>
+            {/* <div className="card-body">
+              <ButtonItems items={this.state.doneItems} />
+            </div> */}
+          </div>
+        </div>
+
+        <div className="container" id="done-container">
+          <div className="card">
+            <h6 className="card-header">✓&nbsp;DONE</h6>
+            <div className="card-body">
+              <ButtonItems items={this.state.doneItems} />
+            </div>
+          </div>
         </div>
       </div>
     )
