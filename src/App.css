@@ -39,28 +39,32 @@
 }
 
 #Todo-button {
-  font-size: medium;
+  font-size: x-large;
   /* font-weight: normal; */
   /* color: white; */
   text-decoration: none;
   margin: 2px;
+  background-color: #282c34;
 }
 
 #Done-button {
-  font-size: medium;
+  font-size: x-large;
   /* font-weight: lighter; */
   /* color: darkgray; */
   text-decoration: line-through;
+  background-color:rgb(179, 179, 179);
   margin: 2px;
 }
 
 #todo-container{
   margin-top: 10px;
+  border: 0px;
 }
 
 
 #done-container{
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #Pegarata-img {

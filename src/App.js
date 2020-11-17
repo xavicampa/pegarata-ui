@@ -2,19 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import './App.css';
 import { Button, InputGroup, InputGroupAddon, Input } from 'reactstrap';
-import SketchExample from './components/sketch'
+// import SketchExample from './components/sketch'
 
 const ButtonItems = props =>
   props.items.map((item) =>
-    // <ListGroupItem tag="button"
-    //   id={item.done ? "Done-button" : "Todo-button"}
-    //   action
-    //   onClick={(e) => item.onToggleItem(e.target.value)}
-    //   value={item.name}
-    //   key={item.name}
-    // >
-    //   {item.name}
-    // </ListGroupItem>
     <a
       className={item.done ? "badge badge-pill badge-secondary" : "badge badge-pill badge-primary"}
       href="#"
@@ -27,7 +18,6 @@ const ButtonItems = props =>
       name={item.name}>
       {item.name}
     </a >
-    // <Button className="btn btn-primary btn-sm" key={item.name} onClick={(e) => item.onToggleItem(e.target.value)} name={item.name}>{item.name}</Button>
   )
 
 ButtonItems.propTypes = {
@@ -56,12 +46,16 @@ class App extends React.Component {
     this.state = {
       item: "",
       todoItems: [
-        { name: "test1", done: false, onToggleItem: this.handleDone },
-        { name: "test2", done: false, onToggleItem: this.handleDone }
+        { name: "Meat 🥩", done: false, onToggleItem: this.handleDone },
+        { name: "Apples 🍎", done: false, onToggleItem: this.handleDone },
+        { name: "Oranges 🍊", done: false, onToggleItem: this.handleDone },
+        { name: "Bananas 🍌", done: false, onToggleItem: this.handleDone },
+        { name: "Tomato sauce 🥫", done: false, onToggleItem: this.handleDone },
+        { name: "Potatos 🥔", done: false, onToggleItem: this.handleDone }
       ],
       doneItems: [
-        { name: "test3", done: true, onToggleItem: this.handleTodo },
-        { name: "test4", done: true, onToggleItem: this.handleTodo }
+        { name: "Milk 🥛", done: true, onToggleItem: this.handleTodo },
+        { name: "Eggs 🥚", done: true, onToggleItem: this.handleTodo }
       ]
     };
   }
@@ -117,9 +111,17 @@ class App extends React.Component {
       <div className="App" >
         <div className="App-header">
           Pegarata
-      </div>
-        <div className="container">
-          <InputGroup className="Input">
+        </div>
+
+        <div className="container-fluid" id="todo-container">
+          <ButtonItems items={this.state.todoItems} />
+        </div>
+
+        <div className="container-fluid" style={{ bottom: "10px", position: "fixed" }}>
+          <div className="container-fluid" id="done-container">
+            <ButtonItems items={this.state.doneItems} />
+          </div>
+          <InputGroup className="Input" size="lg">
             <Input placeholder="Add new item..."
               maxLength="40"
               name="newItem"
@@ -130,9 +132,9 @@ class App extends React.Component {
 
             <InputGroupAddon addonType="append">
               {/*  */}
-              <Button color="primary" id="colorpickerbutton" onClick={this.handleAdd}>
+              {/* <Button color="primary" id="colorpickerbutton" onClick={this.handleAdd}>
                 <SketchExample />
-              </Button>
+              </Button> */}
               {/* <div className="dropdown">
                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Color
@@ -147,35 +149,19 @@ class App extends React.Component {
             </InputGroupAddon>
 
           </InputGroup>
-          {/* <ListGroup className="Todo-items">
-            <ButtonItems items={this.state.todoItems} />
-          </ListGroup>
-          <ListGroup className="Done-items">
-            <ButtonItems items={this.state.doneItems} />
-          </ListGroup> */}
-        </div>
-
-        <div className="container" id="todo-container">
-          <div className="card">
-            <h6 className="card-header">𐄂&nbsp;TODO</h6>
-            <div className="card-body">
-              <ButtonItems items={this.state.todoItems} />
-            </div>
-            {/* <div className="card-body">
-              <ButtonItems items={this.state.doneItems} />
-            </div> */}
-          </div>
-        </div>
-
-        <div className="container" id="done-container">
-          <div className="card">
-            <h6 className="card-header">✓&nbsp;DONE</h6>
-            <div className="card-body">
-              <ButtonItems items={this.state.doneItems} />
-            </div>
-          </div>
+          {/* <form>
+            <input
+              value={this.state.item}
+              onChange={this.handleItemChange}
+              onKeyPress={this.handleKeyPress}
+              className="form-control"
+              id="itemInput"
+              placeholder="Add item..." />
+            <Button color="primary" id="addbutton" onClick={this.handleAdd}>Add</Button>
+          </form> */}
         </div>
       </div>
+
     )
   }
 }
