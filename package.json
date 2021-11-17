@@ -9,7 +9,7 @@
     "react": "^16.0.0",
     "react-color": "^2.19.3",
     "react-dom": "^16.0.1",
-    "reactstrap": "^8.10.0",
+    "reactstrap": "^8.10.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
