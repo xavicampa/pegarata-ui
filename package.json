@@ -4,19 +4,22 @@
   "private": true,
   "dependencies": {
     "@popperjs/core": "^2.11.0",
+    "axios": "^0.24.0",
     "bootstrap": "^4.6.1",
     "prop-types": "^15.7.2",
     "react": "^16.0.0",
     "react-color": "^2.19.3",
     "react-dom": "^16.0.1",
     "reactstrap": "^8.10.1",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "pegarata-api-js": "file:gen/api/dist"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "api": "rm -rf gen/api && openapi-generator-cli generate -i myapi.yaml -c api.json -g typescript-axios -o gen/api && cd gen/api && npm install && npm run build"
   },
   "eslintConfig": {
     "extends": [
@@ -37,12 +40,13 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.1.2",
+    "@testing-library/user-event": "^12.2.2",
     "eslint": "^7.13.0",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "react-scripts": "^4.0.0",
-    "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^11.1.2",
-    "@testing-library/user-event": "^12.2.2"
+    "@openapitools/openapi-generator-cli": "^2.4.3"
   }
 }

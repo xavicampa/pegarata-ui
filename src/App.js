@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import './App.css';
 import { Button, InputGroup, InputGroupAddon, Input } from 'reactstrap';
-// import SketchExample from './components/sketch'
+import { DefaultApi } from 'pegarata-api-js'
 
 const ButtonItems = props =>
   props.items.map((item) =>
@@ -35,6 +35,7 @@ ButtonItems.propTypes = {
 class App extends React.Component {
 
   constructor(props) {
+
     super(props);
 
     this.handleAdd = this.handleAdd.bind(this)
@@ -43,25 +44,33 @@ class App extends React.Component {
     this.handleItemChange = this.handleItemChange.bind(this)
     this.handleKeyPress = this.handleKeyPress.bind(this)
 
+    this.api = new DefaultApi(null, "http://localhost:8000");
+    this.api.itemsGet().then(
+      response => {
+        this.items = response.data
+      }
+    )
+    console.log(this.items)
+
     this.state = {
       item: "",
       todoItems: [
-        { name: "Meat 🥩", done: false, onToggleItem: this.handleDone },
-        { name: "Apples 🍎", done: false, onToggleItem: this.handleDone },
-        { name: "Oranges 🍊", done: false, onToggleItem: this.handleDone },
-        { name: "Bananas 🍌", done: false, onToggleItem: this.handleDone },
-        { name: "Tomato sauce 🥫", done: false, onToggleItem: this.handleDone },
-        { name: "Potatos 🥔", done: false, onToggleItem: this.handleDone }
+        { name: "Meat 🥩", onToggleItem: this.handleDone },
+        { name: "Apples 🍎", onToggleItem: this.handleDone },
+        { name: "Oranges 🍊", onToggleItem: this.handleDone },
+        { name: "Bananas 🍌", onToggleItem: this.handleDone },
+        { name: "Tomato sauce 🥫", onToggleItem: this.handleDone },
+        { name: "Potatos 🥔", onToggleItem: this.handleDone }
       ],
       doneItems: [
         { name: "Milk 🥛", done: true, onToggleItem: this.handleTodo },
         { name: "Eggs 🥚", done: true, onToggleItem: this.handleTodo }
       ]
     };
+
   }
 
   handleDone(e) {
-    console.log(e)
     let item = this.state.todoItems.find(item => item.name.toLowerCase() === e.toLowerCase())
 
     item.done = true
@@ -70,6 +79,16 @@ class App extends React.Component {
       todoItems: this.state.todoItems.filter(item => item.name.toLowerCase() !== e.toLowerCase()),
       doneItems: [item].concat(this.state.doneItems)
     })
+
+    this.api.itemsItemIdPut(item.uid.toLowerCase()).then(
+      response => {
+        console.log(response.status)
+      },
+      error => {
+        console.error(error)
+        throw error
+      }
+    )
   }
 
   handleTodo(e) {
