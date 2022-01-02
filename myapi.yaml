@@ -1,0 +1,129 @@
+openapi: 3.0.3
+info:
+  title: Pegarata API
+  description: Pegarata API allows you to interact with your shopping list
+  version: 0.1.0
+paths:
+  /items:
+    get:
+      summary: Returns a list of items
+      description: None
+      responses:
+        '200':    # status code
+          description: A JSON array of items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayOfPersistedItems'
+            application/yaml:
+              schema:
+                $ref: '#/components/schemas/ArrayOfPersistedItems'
+    post:
+      summary: Creates an extra item
+      description: None
+      requestBody:
+        required: true
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '201':    # status code
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersistedItem'
+            application/yaml:
+              schema:
+                $ref: '#/components/schemas/PersistedItem'
+  /items/{itemId}:
+    put:
+      summary: Toggles an item in the list
+      description: None
+      parameters:
+        - name: itemId
+          in: path
+          description: None
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':    # status code
+          description: Toggled
+        '404':
+          description: Not Found
+    delete:
+      summary: Removes an item from the list
+      description: None
+      parameters:
+        - name: itemId
+          in: path
+          description: None
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':    # status code
+          description: Deleted
+        '404':
+          description: Not Found
+
+  /ping:
+    get:
+      summary: Heartbeat
+      description: Checks the health of the API
+      responses:
+        '200':
+          description: A status message repesenting the health of the API
+          content:
+            application/yaml:
+              schema:
+                $ref: '#/components/schemas/HeartBeatResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HeartBeatResponse'
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    Item:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 24
+        done:
+          type: boolean
+      example:
+        name: chorizo
+    PersistedItem:
+      allOf:
+      - $ref: '#/components/schemas/Item'
+      - type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+        example:
+          id: d5fa7a5e-41a2-44d2-bede-00130f7569b4
+          name: chorizo
+          done: false
+    ArrayOfPersistedItems:
+      type: array
+      items:
+        $ref: '#/components/schemas/PersistedItem'
+    HeartBeatResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [OK, FAILURE]
+        message:
+          type: string
+      example:
+        status: OK
+        name: All OK!
